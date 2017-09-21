@@ -4,6 +4,9 @@ import javax.servlet.http.HttpSession
 import org.slf4j.MDC
 
 
+/**
+ * Interceptor que prepara parâmetros padrões dos controllers e extrai informações de {@link ActionDescription} presentes em seus métodos.
+ */
 class ForEachControllerInterceptor {
 
 
@@ -46,6 +49,7 @@ class ForEachControllerInterceptor {
         }
 
         if ((controllerName != null) && (!controllerName.isEmpty())) {
+
             request.model.lastRequest.controllerName = controllerName
             request.model.lastRequest.actionName     = actionName
 
@@ -64,6 +68,7 @@ class ForEachControllerInterceptor {
 
 
             log.debug "ForEachControllerInterceptor - ${controllerName}.${actionName}"
+
         }
 
 

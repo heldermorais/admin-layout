@@ -26,6 +26,8 @@ class ShiroSecurityGrailsPlugin extends Plugin {
 
     def log = LoggerFactory.getLogger(ShiroSecurityGrailsPlugin)
 
+
+
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "3.3.0 > *"
     // resources that are excluded from plugin packaging

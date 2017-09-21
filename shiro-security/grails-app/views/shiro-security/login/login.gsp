@@ -13,11 +13,11 @@
     <table>
       <tbody>
         <tr>
-          <td>Username:</td>
+          <td>Usuário:</td>
           <td><input type="text" name="username" value="${username}" /></td>
         </tr>
         <tr>
-          <td>Password:</td>
+          <td>Senha:</td>
           <td><input type="password" name="password" value="" /></td>
         </tr>
         <tr>
@@ -26,7 +26,7 @@
         </tr>
         <tr>
           <td />
-          <td><input type="submit" value="Sign in" /></td>
+          <td><input type="submit" value="Login" /></td>
         </tr>
       </tbody>
     </table>

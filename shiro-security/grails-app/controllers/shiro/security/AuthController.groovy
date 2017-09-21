@@ -6,7 +6,9 @@ import org.apache.shiro.authc.AuthenticationException
 import org.apache.shiro.authc.UsernamePasswordToken
 import org.apache.shiro.web.util.WebUtils
 
-
+/**
+ * Controller que promove a autenticação de usuários (via username/password).
+ */
 class AuthController {
 	
 	//protected static final Logger log = LoggerFactory.getLogger(AuthController)
@@ -19,7 +21,7 @@ class AuthController {
 	}
 
 	def login () {
-		render view:'login', model: [ username: params.username, rememberMe: (params.rememberMe != null), targetUri: params.targetUri ]
+		render view:'/shiro-security/login/login', model: [ username: params.username, rememberMe: (params.rememberMe != null), targetUri: params.targetUri ]
 	}
 
 	def signIn () {

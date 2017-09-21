@@ -8,8 +8,12 @@ import org.apache.shiro.authc.UsernamePasswordToken
 import org.apache.shiro.subject.PrincipalCollection
 import shiro.security.AbstractShiroRealm
 
+
+/**
+ * Realm Shiro principal. Esta classe simula a autenticação e autorização de usuários à recursos da app.
+ */
 @Transactional
-class MainShiroRealmService extends AbstractShiroRealm{
+class MainShiroRealmService extends AbstractShiroRealm {
 
 
     @Override
