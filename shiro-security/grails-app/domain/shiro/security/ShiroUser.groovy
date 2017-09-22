@@ -3,6 +3,7 @@ package shiro.security
 class ShiroUser {
 
     String name
+    String password
 
     static hasMany = [ roles: ShiroRole, permissions: String ]
 

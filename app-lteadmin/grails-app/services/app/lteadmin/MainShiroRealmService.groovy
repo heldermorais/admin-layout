@@ -7,6 +7,9 @@ import org.apache.shiro.authc.SimpleAccount
 import org.apache.shiro.authc.UsernamePasswordToken
 import org.apache.shiro.subject.PrincipalCollection
 import shiro.security.AbstractShiroRealm
+import shiro.security.ShiroApp
+import shiro.security.ShiroRole
+import shiro.security.ShiroUser
 
 
 /**
@@ -14,6 +17,12 @@ import shiro.security.AbstractShiroRealm
  */
 @Transactional
 class MainShiroRealmService extends AbstractShiroRealm {
+
+
+    MainShiroRealmService(){
+
+
+    }
 
 
     @Override
