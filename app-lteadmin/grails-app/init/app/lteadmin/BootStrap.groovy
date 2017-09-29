@@ -10,6 +10,7 @@ class BootStrap {
 
     def init = { servletContext ->
 
+
         ShiroApp app = new ShiroApp(name: "app-lteadmin")
         ShiroRole adminRole = new ShiroRole(name: "admin", permissions: ["*:*"])
         adminRole.app = app
@@ -21,7 +22,7 @@ class BootStrap {
         app.addToRoles(userRole)
         app.save()
 
-        ShiroUser usr1 = new ShiroUser(name: "helder.morais", password: "abc123")
+        ShiroUser usr1 = new ShiroUser(name: "Helder Morais", login: "helder.morais", password: "abc123")
         usr1.addToRoles (userRole)
         usr1.save()
 

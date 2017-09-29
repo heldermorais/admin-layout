@@ -18,6 +18,8 @@ class ShiroInterceptor {
                 .excludes(controller: 'login')
                 .excludes(controller: 'auth')
                 .excludes(uri: '/static/**')
+                .excludes(uri:'/favicon.ico')
+                .excludes(controller: 'favicon')
 
     }
 

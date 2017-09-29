@@ -1,5 +1,9 @@
 package shiro.security
 
+
+
+
+
 class ShiroApp {
 
     String name
@@ -8,6 +12,11 @@ class ShiroApp {
 
     static constraints = {
         name nullable: false, blank: false
+    }
+
+    void addRole(ShiroRole newRole){
+         newRole.app = this
+         roles.add(newRole)
     }
 
 }
