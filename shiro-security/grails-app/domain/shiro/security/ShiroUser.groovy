@@ -21,6 +21,10 @@ class ShiroUser {
     }
 
 
+
+
+
+
     Set<String> getAllPermissions() {
 
         HashSet<String> tempPermissionNames = new HashSet<String>()
@@ -35,6 +39,8 @@ class ShiroUser {
 
         return tempPermissionNames
     }
+
+
 
 
 
