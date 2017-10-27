@@ -21,4 +21,5 @@ class ShiroRole {
     void addResourcePermission (String resourcePermission){
         this.permissions.add(resourcePermission)
     }
+
 }

@@ -125,6 +125,7 @@ class ShiroInterceptor {
 
 
     protected Boolean isRequestPermitted(String controllerName, String actionName, params, Subject subject) {
+
         log.debug "isRequestPermitted - BEGIN"
 
         def permString = new StringBuilder()

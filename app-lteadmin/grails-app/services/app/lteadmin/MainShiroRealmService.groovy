@@ -23,7 +23,6 @@ class MainShiroRealmService extends AbstractShiroRealm {
 
     MainShiroRealmService() {
 
-
     }
 
 

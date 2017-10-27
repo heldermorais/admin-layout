@@ -4,6 +4,6 @@ class OutroController {
 
     def index() {
 
-
     }
+
 }
