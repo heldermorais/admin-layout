@@ -60,10 +60,8 @@ class ForEachControllerInterceptor {
 
             if(actionDescriptionProcessorService != null){
 
-                log.debug "processor != null"
+                log.debug "ActionDescriptionProcessor is acive."
                 request.model.lastRequest << actionDescriptionProcessorService.process(controllerName, actionName)
-
-                //log.debug "processor ${request.model?.admin}"
             }
 
 
