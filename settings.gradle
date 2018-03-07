@@ -1,0 +1,5 @@
+include 'app-adminlte', 'common-backend'
+
+
+//include 'g3-spe-remessa-domain'
+//project(":g3-spe-remessa-domain").projectDir = file("../spe/g3-spe-remessa-domain")
