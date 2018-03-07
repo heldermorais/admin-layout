@@ -9,7 +9,7 @@ buildscript {
     }
 }
 
-version "0.1"
+version "2018.03"
 group "common.backend"
 
 apply plugin:"eclipse"
