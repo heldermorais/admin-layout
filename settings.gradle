@@ -1,4 +1,4 @@
-include 'app-adminlte', 'common-backend'
+include 'app-adminlte', 'common-backend', 'gui-adminLayout'
 
 
 //include 'g3-spe-remessa-domain'

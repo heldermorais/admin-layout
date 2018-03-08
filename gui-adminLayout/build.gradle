@@ -9,8 +9,8 @@ buildscript {
     }
 }
 
-version "2018.03"
-group "common.backend"
+version "0.1"
+group "gui.adminlayout"
 
 apply plugin:"eclipse"
 apply plugin:"idea"

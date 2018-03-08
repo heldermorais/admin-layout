@@ -1,5 +1,6 @@
 grails {
     plugins {
         compile project(':common-backend')
+        compile project(':gui-adminlayout')
     }
 }
