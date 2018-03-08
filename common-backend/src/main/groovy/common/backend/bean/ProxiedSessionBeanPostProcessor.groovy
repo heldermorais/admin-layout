@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.apache.commons.lang3.builder.RecursiveToStringStyle
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder
+import org.apache.commons.text.WordUtils;
 
 public class ProxiedSessionBeanPostProcessor implements BeanFactoryPostProcessor {
 
@@ -33,9 +34,13 @@ public void postProcessBeanFactory (
        GenericBeanDefinition bd = new GenericBeanDefinition();
        bd.setBeanClass(org.springframework.aop.scope.ScopedProxyFactoryBean);
        bd.getPropertyValues().add("targetBeanName", beanName);
-       bd.getPropertyValues().add("proxyTargetClass", true);
+       bd.getPropertyValues().add("proxyTargetClass", true); //TODO: Implementar por BooleanEnum
                //proxyTargetClass = true
+
        ((DefaultListableBeanFactory) beanFactory).registerBeanDefinition("proxied_${beanName}", bd);
+       ((DefaultListableBeanFactory) beanFactory).registerBeanDefinition("${beanName}Proxy", bd);
+       beanName = WordUtils.capitalize(beanName)
+       ((DefaultListableBeanFactory) beanFactory).registerBeanDefinition("proxied${beanName}", bd);
     }
               //.registerBeanDefinition("myBeanName", bd);
 }
