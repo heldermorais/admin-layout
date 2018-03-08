@@ -37,13 +37,13 @@ class NotificationController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.created.message', 
+                flash.message = message(code: 'default.created.message',
                                         args: [
-                                                message(code: 'notification.label', default: 'Notification'), 
+                                                message(code: 'notification.label', default: 'Notification'),
                                                 notification.id
                                               ]
                                        )
-                                       
+
                 redirect notification
             }
             '*' { respond notification, [status: CREATED] }
@@ -69,13 +69,13 @@ class NotificationController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', 
+                flash.message = message(code: 'default.updated.message',
                                         args: [
-                                               message(code: 'notification.label', default: 'Notification'), 
+                                               message(code: 'notification.label', default: 'Notification'),
                                                notification.id
                                               ]
                                        )
-                                       
+
                 redirect notification
             }
             '*'{ respond notification, [status: OK] }
@@ -92,7 +92,13 @@ class NotificationController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'notification.label', default: 'Notification'), id])
+                flash.message = message(code: 'default.deleted.message',
+                                        args: [
+                                               message(code: 'notification.label', default: 'Notification'),
+                                               id
+                                              ]
+                                        )
+                                        
                 redirect action:"index", method:"GET"
             }
             '*'{ render status: NO_CONTENT }
@@ -102,7 +108,13 @@ class NotificationController {
     protected void notFound() {
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'notification.label', default: 'Notification'), params.id])
+                flash.message = message(code: 'default.not.found.message',
+                                        args: [
+                                               message(code: 'notification.label', default: 'Notification'),
+                                               params.id
+                                              ]
+                                        )
+
                 redirect action: "index", method: "GET"
             }
             '*'{ render status: NOT_FOUND }

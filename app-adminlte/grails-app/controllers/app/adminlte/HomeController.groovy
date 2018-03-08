@@ -6,6 +6,6 @@ class HomeController {
 
     @ActionDescription(title="Home",description="index")
     def index() {
-        render " Home Controller !"
+        render "<h1>Home Controller !</h1>"
     }
 }
