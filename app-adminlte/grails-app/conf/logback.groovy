@@ -37,3 +37,4 @@ root(ERROR, ['STDOUT'])
 
 
 logger 'common.backend', DEBUG, ['STDOUT'], false
+logger 'app.adminlte', DEBUG, ['STDOUT'], false

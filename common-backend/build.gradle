@@ -51,8 +51,10 @@ dependencies {
     testCompile "org.grails:grails-plugin-testing"
     testCompile "org.grails:grails-web-testing-support"
 
-    apply from: 'ext-lib.gradle'
+
 }
+
+apply from: 'ext-lib.gradle'
 
 bootRun {
     jvmArgs('-Dspring.output.ansi.enabled=always')
