@@ -30,6 +30,9 @@
                 <li><a href="#">Controllers: ${grailsApplication.controllerClasses.size()}</a></li>
                 <li><a href="#">Domains: ${grailsApplication.domainClasses.size()}</a></li>
                 <li><a href="#">Services: ${grailsApplication.serviceClasses.size()}</a></li>
+                <g:each var="serviceClass" in="${grailsApplication.serviceClasses}">
+                  <li><a href="#">Service: ${serviceClass.propertyName}</a></li>
+                </g:each>
                 <li><a href="#">Tag Libraries: ${grailsApplication.tagLibClasses.size()}</a></li>
             </ul>
         </li>

@@ -5,13 +5,15 @@ import common.backend.ActionDescription
 class HomeController {
 
 
-    HomeService proxied_homeService
+    HomeService proxiedHomeService
 
     @ActionDescription(title="Home",description="index")
     def index() {
 
-        proxied_homeService.serviceMethod()
+        proxiedHomeService.serviceMethod()
         render "<h1>Home Controller !</h1>"
 
     }
+
+    
 }
