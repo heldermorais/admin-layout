@@ -1,5 +1,6 @@
 package common.backend
 
+import common.backend.bean.ProxiedSessionBeanPostProcessor
 import grails.plugins.*
 
 class CommonBackendGrailsPlugin extends Plugin {

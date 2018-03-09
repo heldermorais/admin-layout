@@ -1,4 +1,4 @@
-package common.backend
+package common.backend.bean
 
 import groovy.util.logging.Slf4j
 import org.springframework.beans.BeansException
@@ -14,6 +14,8 @@ import org.apache.commons.lang3.builder.RecursiveToStringStyle
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder
 import org.apache.commons.text.WordUtils
 import org.springframework.core.annotation.AnnotationUtils
+
+import common.backend.BooleanEnum
 
 @Slf4j
 public class ProxiedSessionBeanPostProcessor implements BeanFactoryPostProcessor {

@@ -1,7 +1,8 @@
 package app.adminlte
 
+import common.backend.bean.ProxiedBean
 import grails.gorm.transactions.Transactional
-import common.backend.ProxiedBean
+
 
 
 @ProxiedBean()

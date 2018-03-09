@@ -1,1 +1,6 @@
+dependencies {
+	
 // Additional Libs
+compile "io.methvin:directory-watcher:0.4.0"
+
+}
