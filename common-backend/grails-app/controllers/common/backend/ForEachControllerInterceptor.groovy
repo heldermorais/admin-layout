@@ -10,6 +10,7 @@ import org.slf4j.MDC
 class ForEachControllerInterceptor {
 
 
+
     int order = HIGHEST_PRECEDENCE + 100
 
     ActionDescriptionProcessorService actionDescriptionProcessorService
@@ -23,7 +24,7 @@ class ForEachControllerInterceptor {
 
     boolean before() {
 
-        HttpSession session = request.getSession()
+        HttpSession session = request.getSession(true)
 
         request.model = new HashMap()
 
@@ -31,10 +32,10 @@ class ForEachControllerInterceptor {
 
         if (session.isNew()) {
             // Freshly created.
-            log.debug "ForEachControllerInterceptor - session.isNew"
+            log.info "ForEachControllerInterceptor - session.isNew (${session.id})"
         } else {
             // Already created.
-            log.debug "ForEachControllerInterceptor - session.alreadyCreated"
+            log.info "ForEachControllerInterceptor - session.alreadyCreated (${session.id})"
         }
 
 

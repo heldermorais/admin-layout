@@ -9,7 +9,8 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 
 /**
- * Marca classes que tem scope "session" e necessitam ter associado um ScopedProxyFactoryBean.
+ * Marca classes que tem scope que necessitam ser instanciadas através de um
+ * {@link org.springframework.aop.scope.ScopedProxyFactoryBean ScopedProxyFactoryBean}.
  *
  * @author helder.morais
  *
@@ -23,13 +24,8 @@ public @interface ProxiedBean {
 	 *
 	 * @return
 	 */
-	String targetBeanName();
+	String targetBeanName() default ".";
 
-	/**
-	 * Descricao da "Action"
-	 *
-	 * @return
-	 */
 	BooleanEnum proxyTargetClass() default BooleanEnum.TRUE;
 
 

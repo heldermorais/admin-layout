@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/admin-layout.iml" filepath="$PROJECT_DIR$/admin-layout.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app-adminlte/app-adminlte.iml" filepath="$PROJECT_DIR$/.idea/modules/app-adminlte/app-adminlte.iml" group="app-adminlte" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app-adminlte/app-adminlte_integrationTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app-adminlte/app-adminlte_integrationTest.iml" group="app-adminlte" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app-adminlte/app-adminlte_main.iml" filepath="$PROJECT_DIR$/.idea/modules/app-adminlte/app-adminlte_main.iml" group="app-adminlte" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app-adminlte/app-adminlte_test.iml" filepath="$PROJECT_DIR$/.idea/modules/app-adminlte/app-adminlte_test.iml" group="app-adminlte" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common-backend/common-backend.iml" filepath="$PROJECT_DIR$/.idea/modules/common-backend/common-backend.iml" group="common-backend" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common-backend/common-backend_ast.iml" filepath="$PROJECT_DIR$/.idea/modules/common-backend/common-backend_ast.iml" group="common-backend" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common-backend/common-backend_integrationTest.iml" filepath="$PROJECT_DIR$/.idea/modules/common-backend/common-backend_integrationTest.iml" group="common-backend" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common-backend/common-backend_main.iml" filepath="$PROJECT_DIR$/.idea/modules/common-backend/common-backend_main.iml" group="common-backend" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common-backend/common-backend_test.iml" filepath="$PROJECT_DIR$/.idea/modules/common-backend/common-backend_test.iml" group="common-backend" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gui-adminLayout/gui-adminLayout.iml" filepath="$PROJECT_DIR$/.idea/modules/gui-adminLayout/gui-adminLayout.iml" group="gui-adminLayout" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gui-adminLayout/gui-adminLayout_ast.iml" filepath="$PROJECT_DIR$/.idea/modules/gui-adminLayout/gui-adminLayout_ast.iml" group="gui-adminLayout" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gui-adminLayout/gui-adminLayout_integrationTest.iml" filepath="$PROJECT_DIR$/.idea/modules/gui-adminLayout/gui-adminLayout_integrationTest.iml" group="gui-adminLayout" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gui-adminLayout/gui-adminLayout_main.iml" filepath="$PROJECT_DIR$/.idea/modules/gui-adminLayout/gui-adminLayout_main.iml" group="gui-adminLayout" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gui-adminLayout/gui-adminLayout_test.iml" filepath="$PROJECT_DIR$/.idea/modules/gui-adminLayout/gui-adminLayout_test.iml" group="gui-adminLayout" />
+    </modules>
+  </component>
+</project>

@@ -14,11 +14,8 @@ appender('STDOUT', ConsoleAppender) {
         charset = Charset.forName('UTF-8')
 
         pattern =
-                '%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} ' + // Date
-                        '%clr(%5p) ' + // Log level
-                        '%clr(---){faint} %clr([%15.15t]){faint} ' + // Thread
-                        '%clr(%-40.40logger{39}){cyan} %clr(:){faint} ' + // Logger
-                        '%m%n%wex' // Message
+                '[%date] [%X{sessionId:--}] [%level] [%logger{10}] [%file:%line] [%msg]%n'
+
     }
 }
 
@@ -36,5 +33,8 @@ if (Environment.isDevelopmentMode() && targetDir != null) {
 root(ERROR, ['STDOUT'])
 
 
-logger 'common.backend', DEBUG, ['STDOUT'], false
+logger 'common.backend', WARN, ['STDOUT'], false
+logger 'common.backend.ForEachControllerInterceptor', WARN, ['STDOUT'], false
+logger 'common.backend.ActionDescriptionProcessorService', WARN, ['STDOUT'], false
+logger 'common.backend.ProxiedSessionBeanPostProcessor', DEBUG, ['STDOUT'], false
 logger 'app.adminlte', DEBUG, ['STDOUT'], false

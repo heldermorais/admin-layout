@@ -7,9 +7,7 @@ import grails.util.Environment
 class ReloadConfigService {
 
 
-
     def grailsApplication
-
 
 
 

@@ -51,7 +51,6 @@ dependencies {
     testCompile "org.grails:grails-plugin-testing"
     testCompile "org.grails:grails-web-testing-support"
 
-    apply from: 'ext-lib.gradle'
 }
 
 bootRun {
@@ -77,3 +76,6 @@ grailsPublish {
 assets {
     packagePlugin = true
 }
+
+apply from: 'ext-lib.gradle'
+//apply from: 'plugin-dependencies.gradle'
