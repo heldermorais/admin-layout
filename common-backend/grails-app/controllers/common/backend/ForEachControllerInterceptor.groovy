@@ -15,7 +15,12 @@ class ForEachControllerInterceptor {
 
     int order = HIGHEST_PRECEDENCE + 100
 
+    /**
+     * Service de processamento de {@link common.backend.web.actions.ActionDescription}
+     */
     ActionDescriptionProcessorService actionDescriptionProcessorService
+
+
 
     ForEachControllerInterceptor() {
         matchAll()
@@ -24,6 +29,12 @@ class ForEachControllerInterceptor {
                 .excludes(uri: '/static/**')
     }
 
+    /**
+     * Executar antes do Request ser enviado ao respectivo Controller. No caso, este interceptor injeta no request,
+     * o atributo model, que pode conter os V.O.'s para consumo pelas Views.
+     *
+     * @return DEVE retornar TRUE, sinalizando que o request será direcionado ao Controller
+     */
     boolean before() {
 
         HttpSession session = request.getSession(true)
@@ -77,6 +88,12 @@ class ForEachControllerInterceptor {
         return true
     }
 
+
+    /**
+     *
+     *
+     * @return DEVE retornar TRUE sinalizando que o request foi processado e vai para a view.
+     */
     boolean after() {
 
         if(model == null){
@@ -88,6 +105,10 @@ class ForEachControllerInterceptor {
         return true
     }
 
+
+    /**
+     * Executado após a renderização da view.
+     */
     void afterView() {
         // no-op
     }
