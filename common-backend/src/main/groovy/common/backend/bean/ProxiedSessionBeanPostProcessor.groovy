@@ -10,12 +10,10 @@ import org.springframework.beans.factory.config.BeanDefinition
 //import org.springframework.context.annotation.AnnotationConfigApplicationContext
 //import org.springframework.context.annotation.Bean;
 //import org.springframework.context.annotation.Configuration;
-import org.apache.commons.lang3.builder.RecursiveToStringStyle
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder
 import org.apache.commons.text.WordUtils
 import org.springframework.core.annotation.AnnotationUtils
 
-import common.backend.BooleanEnum
+import common.backend.utils.BooleanEnum
 
 @Slf4j
 public class ProxiedSessionBeanPostProcessor implements BeanFactoryPostProcessor {

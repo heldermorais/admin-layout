@@ -2,4 +2,7 @@ dependencies {
   // Additional Libs
   compile "org.apache.commons:commons-lang3:3.7"
   compile "org.apache.commons:commons-text:1.2"
+
+  //compile 'org.grails.plugins:external-config:1.1.2'
+  compile "org.grails.plugins:cache-ehcache:3.0.0.BUILD-SNAPSHOT"
 }

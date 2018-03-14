@@ -2,11 +2,14 @@ package common.backend
 
 import common.backend.bean.ProxiedSessionBeanPostProcessor
 import grails.plugins.*
+import groovy.util.logging.Slf4j
 
+@Slf4j
 class CommonBackendGrailsPlugin extends Plugin {
 
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "3.3.2 > *"
+
     // resources that are excluded from plugin packaging
     def pluginExcludes = [
         "grails-app/views/error.gsp"
@@ -14,8 +17,8 @@ class CommonBackendGrailsPlugin extends Plugin {
 
     // TODO Fill in these fields
     def title = "Common Backend" // Headline display name of the plugin
-    def author = "Your name"
-    def authorEmail = ""
+    def author = "Helder Morais"
+    def authorEmail = "helder.morais@gmail.com"
     def description = '''\
 Brief summary/description of the plugin.
 '''
@@ -33,7 +36,7 @@ Brief summary/description of the plugin.
 //    def organization = [ name: "My Company", url: "http://www.my-company.com/" ]
 
     // Any additional developers beyond the author specified above.
-//    def developers = [ [ name: "Joe Bloggs", email: "joe@bloggs.net" ]]
+    def developers = [ [ name: "Helder Morais", email: "helder.morais@gmail.com" ]]
 
     // Location of the plugin's issue tracker.
 //    def issueManagement = [ system: "JIRA", url: "http://jira.grails.org/browse/GPMYPLUGIN" ]
@@ -42,13 +45,17 @@ Brief summary/description of the plugin.
 //    def scm = [ url: "http://svn.codehaus.org/grails-plugins/" ]
 
     Closure doWithSpring() { {->
-            // TODO Implement runtime spring config (optional)
+
+
             proxiedProcessor(ProxiedSessionBeanPostProcessor){}
+
+
         }
     }
 
     void doWithDynamicMethods() {
         // TODO Implement registering dynamic methods to classes (optional)
+
     }
 
     void doWithApplicationContext() {

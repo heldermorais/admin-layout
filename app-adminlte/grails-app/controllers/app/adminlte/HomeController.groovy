@@ -1,6 +1,6 @@
 package app.adminlte
 
-import common.backend.ActionDescription
+import common.backend.web.actions.ActionDescription
 
 
 
@@ -10,7 +10,7 @@ class HomeController {
     //HomeService proxiedHomeService
     HomeService homeService
 
-    @ActionDescription(title="Home",description="index")
+    //@ActionDescription(title="Home",description="index")
     def index() {
 
         homeService.serviceMethod()

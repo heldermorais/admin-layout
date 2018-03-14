@@ -3,7 +3,7 @@ package common.backend.bean;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import common.backend.BooleanEnum;
+import common.backend.utils.BooleanEnum;
 
 import static java.lang.annotation.ElementType.TYPE;
 //import static java.lang.annotation.ElementType.METHOD;

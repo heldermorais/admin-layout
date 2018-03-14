@@ -1,11 +1,13 @@
 package common.backend
 
+import common.backend.utils.Constants
+
 import javax.servlet.http.HttpSession
 import org.slf4j.MDC
 
 
 /**
- * Interceptor que prepara parâmetros padrões dos controllers e extrai informações de {@link ActionDescription} presentes em seus métodos.
+ * Interceptor que prepara parâmetros padrões dos controllers e extrai informações de {@link common.backend.web.actions.ActionDescription} presentes em seus métodos.
  */
 class ForEachControllerInterceptor {
 

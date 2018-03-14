@@ -10,7 +10,6 @@ class ReloadConfigService {
     def grailsApplication
 
 
-
     def reload( String fileName ) {
         try {
 

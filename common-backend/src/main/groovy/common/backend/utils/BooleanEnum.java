@@ -1,4 +1,4 @@
-package common.backend;
+package common.backend.utils;
 
 public enum BooleanEnum {
    TRUE,

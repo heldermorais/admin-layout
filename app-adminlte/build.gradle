@@ -12,7 +12,8 @@ buildscript {
     }
 }
 
-version "0.1"
+
+version "v0.2"
 group "app.adminlte"
 
 apply plugin:"eclipse"
