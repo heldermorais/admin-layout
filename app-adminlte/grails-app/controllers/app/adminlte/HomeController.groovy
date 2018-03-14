@@ -10,7 +10,7 @@ class HomeController {
     //HomeService proxiedHomeService
     HomeService homeService
 
-    //@ActionDescription(title="Home",description="index")
+    @ActionDescription(title="Home",description="index")
     def index() {
 
         homeService.serviceMethod()

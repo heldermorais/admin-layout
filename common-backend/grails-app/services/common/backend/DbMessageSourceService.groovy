@@ -45,4 +45,10 @@ class DbMessageSourceService extends AbstractMessageSource {
         return format
     }
 
+
+    boolean hasMessage( String code, Locale locale ){
+        CustomMessage msg = CustomMessage.findByCodeAndLocale(code, locale)
+        return (msg != null)
+    }
+
 }

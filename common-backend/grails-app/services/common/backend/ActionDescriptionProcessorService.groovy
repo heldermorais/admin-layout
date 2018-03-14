@@ -28,20 +28,28 @@ class ActionDescriptionProcessorService {
 
         if (controllerClass != null) {
             log.debug "ActionDescriptionProcessor - process - Achou controllerClass"
+            retorno.actionTitle = controllerName
+            retorno.actionIcon  = null
 
             Method method = ReflectionUtils.findMethod(controllerClass.clazz, actionName)
             if (method != null) {
                 log.debug "ActionDescriptionProcessor - process - Achou Method"
+                retorno.actionDescription = actionName
 
-                ActionDescription ann = AnnotationUtils.findAnnotation(method, ActionDescription)
+                String messageTitle       = "${controllerName}.${actionName}.action.title"
+                String messageDescription = "${controllerName}.${actionName}.action.description"
+                String messageIcon        = "${controllerName}.${actionName}.action.icon"
 
-                if (ann != null) {
+                if (!(dbMessageSourceService.hasMessage(messageTitle,locale) && dbMessageSourceService.hasMessage(messageDescription,locale))) {
 
+                    ActionDescription ann = AnnotationUtils.findAnnotation(method, ActionDescription)
                     log.debug "ActionDescriptionProcessor - process - Achou Annotation"
 
-                    retorno.actionTitle       = ann.title()
-                    retorno.actionDescription = ann.description()
-                    retorno.actionIcon        = ann.icon()
+                    if (ann != null) {
+                        retorno.actionTitle = ann.title()
+                        retorno.actionDescription = ann.description()
+                        retorno.actionIcon = ann.icon()
+                    }
 
                 } else {
 
@@ -49,14 +57,15 @@ class ActionDescriptionProcessorService {
 
                     Object[] args = []
 
-                    String messageKey = "${controllerName}.${actionName}.action.title"
-                    retorno.actionTitle = dbMessageSourceService.getMessage(messageKey, args, controllerName, locale)
+                    //String messageKey = "${controllerName}.${actionName}.action.title"
 
-                    messageKey = "${controllerName}.${actionName}.action.description"
-                    retorno.actionDescription = dbMessageSourceService.getMessage(messageKey, args, actionName, locale)
+                    retorno.actionTitle = dbMessageSourceService.getMessage(messageTitle, args, controllerName, locale)
 
-                    messageKey = "${controllerName}.${actionName}.action.icon"
-                    retorno.actionIcon = dbMessageSourceService.getMessage(messageKey, args, "", locale)
+                    //messageKey = "${controllerName}.${actionName}.action.description"
+                    retorno.actionDescription = dbMessageSourceService.getMessage(messageDescription, args, actionName, locale)
+
+                    //messageKey = "${controllerName}.${actionName}.action.icon"
+                    retorno.actionIcon = dbMessageSourceService.getMessage(messageIcon, args, "", locale)
 
 
                 }
