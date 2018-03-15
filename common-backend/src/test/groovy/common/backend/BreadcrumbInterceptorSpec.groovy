@@ -1,9 +1,10 @@
 package common.backend
 
+import common.backend.breadcrumb.BreadcrumbInterceptor
 import grails.testing.web.interceptor.InterceptorUnitTest
 import spock.lang.Specification
 
-class BreadCrumbsInterceptorSpec extends Specification implements InterceptorUnitTest<BreadCrumbsInterceptor> {
+class BreadcrumbInterceptorSpec extends Specification implements InterceptorUnitTest<BreadcrumbInterceptor> {
 
     def setup() {
     }
@@ -12,9 +13,9 @@ class BreadCrumbsInterceptorSpec extends Specification implements InterceptorUni
 
     }
 
-    void "Test breadCrumbs interceptor matching"() {
+    void "Test breadcrumb interceptor matching"() {
         when:"A request matches the interceptor"
-            withRequest(controller:"breadCrumbs")
+            withRequest(controller:"breadcrumb")
 
         then:"The interceptor does match"
             interceptor.doesMatch()

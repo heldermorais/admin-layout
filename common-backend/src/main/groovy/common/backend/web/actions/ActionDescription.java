@@ -1,5 +1,9 @@
 package common.backend.web.actions;
 
+import common.backend.breadcrumb.Breadcrumb;
+import common.backend.breadcrumb.BreadcrumbLifecycle;
+
+import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
@@ -13,6 +17,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * @author heldermorais
  *
  */
+@Documented
 @Retention(RUNTIME)
 @Target({ METHOD })
 public @interface ActionDescription {
@@ -30,7 +35,14 @@ public @interface ActionDescription {
 	 * @return
 	 */
 	String description() default "";
-	
+
+    /**
+     *
+     * @return
+     */
 	String icon() default "";
+
+
+    Breadcrumb breadcrumb();
 
 }
