@@ -61,7 +61,7 @@ class BreadcrumbProcessorService implements GenericControllerExecutionProcessor 
             if (controllerClass != null) {
                 log.debug "BreadcrumbProcessorService - process - Achou controllerClass"
 
-                Breadcrumb foundBreadcrumbAnnotation = extractAnnotationFromMethod(controllerClass, actionName)
+                //Breadcrumb foundBreadcrumbAnnotation = extractAnnotationFromMethod(controllerClass, actionName)
 
                 if (request.model != null) {
                     request.model = new HashMap()
@@ -76,24 +76,24 @@ class BreadcrumbProcessorService implements GenericControllerExecutionProcessor 
 
                 boolean addOnBreadcrumbStack = true
 
-                if (foundBreadcrumbAnnotation != null) {
+                if (annotation != null) {
 
-                    if (foundBreadcrumbAnnotation.operation() == BreadcrumbLifecycle.START) {
+                    if (annotation.operation() == BreadcrumbLifecycle.START) {
                         session.breadcrumbs.clear()
                     }
 
-                    if (foundBreadcrumbAnnotation.operation() == BreadcrumbLifecycle.POP) {
+                    if (annotation.operation() == BreadcrumbLifecycle.POP) {
                         session.breadcrumbs.pop()
                     }
 
 
-                    if(foundBreadcrumbAnnotation.label().equals(".")){
+                    if(annotation.label().equals(".")){
                         label = controllerName
                     }else{
-                        label = foundBreadcrumbAnnotation.label()
+                        label = annotation.label()
                     }
 
-                    addOnBreadcrumbStack = (foundBreadcrumbAnnotation.operation() != BreadcrumbLifecycle.NONE)
+                    addOnBreadcrumbStack = (annotation.operation() != BreadcrumbLifecycle.NONE)
                 }
 
 

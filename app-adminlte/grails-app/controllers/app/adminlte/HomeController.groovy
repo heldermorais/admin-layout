@@ -35,7 +35,7 @@ class HomeController {
     }
 
 
-    @ActionDescription(title="Home",description="pop", breadcrumb = @Breadcrumb( , label = "Home (pop)", operation = BreadcrumbLifecycle.POP))
+    @ActionDescription(title="Home",description="pop", breadcrumb = @Breadcrumb( label = "Home (pop)", operation = BreadcrumbLifecycle.POP))
     def pop() {
 
         homeService.serviceMethod()
