@@ -1,4 +1,4 @@
-package common.backend
+package common.backend.messagesources
 
 import common.backend.bean.ProxiedBean
 import grails.gorm.transactions.Transactional

@@ -1,8 +1,6 @@
 package app.adminlte
 
-import common.backend.CustomMessage
-import common.backend.icons.Fontawsome
-
+import common.backend.messagesources.CustomMessage
 
 class BootStrap {
 

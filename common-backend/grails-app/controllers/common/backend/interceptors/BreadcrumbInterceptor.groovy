@@ -1,4 +1,4 @@
-package common.backend.breadcrumb
+package common.backend.interceptors
 
 import javax.servlet.http.HttpSession
 

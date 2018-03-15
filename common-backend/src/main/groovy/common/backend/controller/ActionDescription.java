@@ -1,7 +1,4 @@
-package common.backend.web.actions;
-
-import common.backend.breadcrumb.Breadcrumb;
-import common.backend.breadcrumb.BreadcrumbLifecycle;
+package common.backend.controller;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;

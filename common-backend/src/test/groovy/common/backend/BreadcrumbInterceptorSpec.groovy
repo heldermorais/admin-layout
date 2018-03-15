@@ -1,6 +1,6 @@
 package common.backend
 
-import common.backend.breadcrumb.BreadcrumbInterceptor
+import common.backend.interceptors.BreadcrumbInterceptor
 import grails.testing.web.interceptor.InterceptorUnitTest
 import spock.lang.Specification
 

@@ -29,43 +29,53 @@ public class ProxiedSessionBeanPostProcessor implements BeanFactoryPostProcessor
         for (String beanName in annBeans) {
             // Para cada bean encontrado ...
 
-            log.debug "Busca o registro do bean ( tal como definido para o Spring )."
+            log.debug "Buscando o registro de ${beanName} no container IoC Spring ."
             BeanDefinition beanDef = ((DefaultListableBeanFactory) beanFactory).getBeanDefinition(beanName)
 
-            log.debug "Busca os valores da annotation ProxiedBean.class"
-            ProxiedBean ann = AnnotationUtils.findAnnotation(Class.forName(beanDef.beanClassName), ProxiedBean)
 
-            log.debug "Remove o registro do bean original ( ${beanName} )"
+            log.debug "Buscando os valores anotados em ProxiedBean para ${beanDef.beanClassName}"
+            ProxiedBean ann = AnnotationUtils.findAnnotation(Class.forName(beanDef.beanClassName), ProxiedBean)
+            def proxyTargetClass = ann.proxyTargetClass() == BooleanEnum.TRUE
+
+            log.debug "Removendo o registro original ( ${beanName} )"
             ((DefaultListableBeanFactory) beanFactory).removeBeanDefinition(beanName)
 
             String oldBeanName = "_${beanName}"
 
-            log.debug "Registra o bean original com nome modificado ( _${beanName} )"
+
+
+            log.debug "Registrando ${beanName} com nome modificado ( _${beanName} )"
             ((DefaultListableBeanFactory) beanFactory).registerBeanDefinition( oldBeanName ,beanDef)
 
-            log.debug "Cria o registro do ScopedProxyFactoryBean requerido"
-            GenericBeanDefinition bd = new GenericBeanDefinition();
+
+
+
+            log.debug "Criando registro para ScopedProxyFactoryBean (${oldBeanName})."
+            GenericBeanDefinition bd = new GenericBeanDefinition()
             bd.setBeanClass(org.springframework.aop.scope.ScopedProxyFactoryBean)
             bd.getPropertyValues().add("targetBeanName", oldBeanName)
-            bd.getPropertyValues().add("proxyTargetClass", (ann.proxyTargetClass() == BooleanEnum.TRUE))
+            bd.getPropertyValues().add("proxyTargetClass", proxyTargetClass)
 
-            log.debug "Registra o proxy com nome Original (${beanName}) !"
+            log.debug "Registrando o proxy como (${beanName})."
             ((DefaultListableBeanFactory) beanFactory).registerBeanDefinition("${beanName}", bd)
 
-            log.debug "Registra o proxy com nomes alternativos : "
 
-            log.debug " - proxied_${beanName}"
-            ((DefaultListableBeanFactory) beanFactory).registerBeanDefinition("proxied_${beanName}", bd)
 
-            log.debug " - ${beanName}Proxied"
-            ((DefaultListableBeanFactory) beanFactory).registerBeanDefinition("${beanName}Proxied", bd)
 
-            log.debug " - ${beanName}Proxy"
-            ((DefaultListableBeanFactory) beanFactory).registerBeanDefinition("${beanName}Proxy", bd)
+            log.debug "Registrando nomes alternativos para ${beanName}: "
+
+            log.debug " - Alias: proxied_${beanName}"
+            ((DefaultListableBeanFactory) beanFactory).registerAlias("${beanName}","proxied_${beanName}")
+
+            log.debug " - Alias: ${beanName}Proxied"
+            ((DefaultListableBeanFactory) beanFactory).registerAlias("${beanName}","${beanName}Proxied")
+
+            log.debug " - Alias: ${beanName}Proxy"
+            ((DefaultListableBeanFactory) beanFactory).registerAlias("${beanName}","${beanName}Proxy")
 
             beanName = WordUtils.capitalize(beanName)
-            log.debug " - proxied${beanName}"
-            ((DefaultListableBeanFactory) beanFactory).registerBeanDefinition("proxied${beanName}", bd)
+            log.debug " - Alias: proxied${beanName}"
+            ((DefaultListableBeanFactory) beanFactory).registerAlias("${beanName}","proxied${beanName}")
         }
 
     }

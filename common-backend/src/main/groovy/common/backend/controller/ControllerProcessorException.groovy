@@ -1,4 +1,4 @@
-package common.backend
+package common.backend.controller
 
 class ControllerProcessorException extends Exception {
 

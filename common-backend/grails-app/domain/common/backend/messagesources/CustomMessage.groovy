@@ -1,7 +1,7 @@
-package common.backend
+package common.backend.messagesources
 
 /**
- * Classe de apoia à {@link DbMessageSourceService}, representando um MessageBundle persistido em Db.
+ * Classe de apoia à {@link common.backend.messagesources.DbMessageSourceService}, representando um MessageBundle persistido em Db.
  * Em suma, esta classe permite que mensagens i18n sejam recuperadas a partir do DB.
  */
 class CustomMessage {

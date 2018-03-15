@@ -1,6 +1,6 @@
 package common.backend
 
-import common.backend.breadcrumb.BreadcrumbProcessorService
+import common.backend.processors.BreadcrumbProcessorService
 import grails.testing.services.ServiceUnitTest
 import spock.lang.Specification
 

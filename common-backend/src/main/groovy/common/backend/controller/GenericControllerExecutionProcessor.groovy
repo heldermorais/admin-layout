@@ -1,4 +1,4 @@
-package common.backend
+package common.backend.controller
 
 import grails.core.GrailsClass
 

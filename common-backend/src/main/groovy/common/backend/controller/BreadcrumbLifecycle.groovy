@@ -1,4 +1,4 @@
-package common.backend.breadcrumb
+package common.backend.controller
 
 enum BreadcrumbLifecycle {
 

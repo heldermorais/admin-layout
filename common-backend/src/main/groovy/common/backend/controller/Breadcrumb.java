@@ -1,4 +1,4 @@
-package common.backend.breadcrumb;
+package common.backend.controller;
 
 
 import java.lang.annotation.Documented;

@@ -1,5 +1,6 @@
 package common.backend
 
+import common.backend.messagesources.CustomMessage
 import grails.testing.gorm.DomainUnitTest
 import spock.lang.Specification
 

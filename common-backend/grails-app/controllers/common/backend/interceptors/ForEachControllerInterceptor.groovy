@@ -1,5 +1,8 @@
-package common.backend
+package common.backend.interceptors
 
+import common.backend.controller.ControllerProcessorException
+import common.backend.controller.GenericControllerExecutionProcessor
+import common.backend.processors.ActionDescriptionProcessorService
 import common.backend.utils.Constants
 import grails.core.GrailsApplication
 
@@ -8,7 +11,7 @@ import org.slf4j.MDC
 
 
 /**
- * Interceptor que prepara parâmetros padrões dos controllers e extrai informações de {@link common.backend.web.actions.ActionDescription} presentes em seus métodos.
+ * Interceptor que prepara parâmetros padrões dos controllers e extrai informações de {@link common.backend.controller.ActionDescription} presentes em seus métodos.
  */
 class ForEachControllerInterceptor {
 
@@ -17,7 +20,7 @@ class ForEachControllerInterceptor {
 
 
     /**
-     * Service de processamento de {@link common.backend.web.actions.ActionDescription}
+     * Service de processamento de {@link common.backend.controller.ActionDescription}
      */
     ActionDescriptionProcessorService actionDescriptionProcessorService
 
@@ -92,60 +95,6 @@ class ForEachControllerInterceptor {
         }
 
 
-    }
-
-    boolean beforeOLD() {
-
-        HttpSession session = request.getSession(true)
-
-        request.model = new HashMap()
-
-
-
-        if (session.isNew()) {
-            // Freshly created.
-            log.info "ForEachControllerInterceptor - session.isNew (${session.id})"
-        } else {
-            // Already created.
-            log.info "ForEachControllerInterceptor - session.alreadyCreated (${session.id})"
-        }
-
-
-
-        MDC.put(Constants.LOG_SESSIONID_KEY,session.id)
-
-
-
-        if (request.model.lastRequest == null) {
-            log.debug "ForEachControllerInterceptor - initializing request.model.lastRequest"
-            request.model.lastRequest = new HashMap()
-        }
-
-        if ((controllerName != null) && (!controllerName.isEmpty())) {
-
-            request.model.lastRequest.controllerName    = controllerName
-            request.model.lastRequest.actionName        = actionName
-
-
-            request.model.lastRequest.actionTitle       = controllerName
-            request.model.lastRequest.actionDescription = actionName
-
-
-            if(actionDescriptionProcessorService != null){
-
-                log.debug "ActionDescriptionProcessor is acive."
-                request.model.lastRequest << actionDescriptionProcessorService.execute(controllerName, actionName, request.locale)
-
-            }
-
-
-            log.debug "ForEachControllerInterceptor - ${controllerName}.${actionName}"
-
-        }
-
-
-
-        return true
     }
 
 
