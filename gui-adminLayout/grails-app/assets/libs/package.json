@@ -1,0 +1,21 @@
+{
+  "name": "libs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "ckeditor": "^4.9.0",
+    "fastclick": "^1.0.6",
+    "fullcalendar": "^3.9.0",
+    "inputmask": "^3.3.11",
+    "jquery": "^3.3.1",
+    "moment": "^2.21.0",
+    "select2": "^4.0.6-rc.1"
+  }
+}
