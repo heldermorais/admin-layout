@@ -1,17 +1,19 @@
 package common.backend.processors
 
+import common.backend.bean.ProxiedBean
+import common.backend.controller.processor.ControllerExecutionContext
+import common.backend.controller.processor.GenericControllerExecutionProcessor
 import common.backend.messagesources.DbMessageSourceService
-import common.backend.controller.ControllerProcessorException
-import common.backend.controller.GenericControllerExecutionProcessor
+import common.backend.controller.processor.ControllerProcessorException
+import common.backend.controller.processor.IControllerExecutionProcessor
 import common.backend.controller.ActionDescription
+import common.backend.utils.Constants
 import grails.core.GrailsApplication
 import grails.core.GrailsClass
 import grails.gorm.transactions.Transactional
 import org.springframework.core.annotation.AnnotationUtils
 import org.springframework.util.ReflectionUtils
 
-import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
 
 import java.lang.reflect.Method
 
@@ -21,7 +23,7 @@ import java.lang.reflect.Method
  * Classe responsável por processar Controllers
  */
 @Transactional
-class ActionDescriptionProcessorService implements GenericControllerExecutionProcessor {
+class ActionDescriptionProcessorService extends GenericControllerExecutionProcessor {
 
 
     /**
@@ -46,42 +48,43 @@ class ActionDescriptionProcessorService implements GenericControllerExecutionPro
         return "actionDescriptionProcessorService"
     }
 
-
     @Override
-    void process(GrailsClass controllerClass, String actionName, HttpServletRequest request, HttpServletResponse response) throws ControllerProcessorException {
+    boolean execute(ControllerExecutionContext context) throws ControllerProcessorException {
+        boolean resultado = Constants.CONTINUE_CHAIN
+
 
         log.debug "ActionDescriptionProcessor - process - BEGIN"
         try {
-            if (controllerClass != null) {
-                
-                if (request.model != null) {
-                    request.model = new HashMap()
+            if (context.controllerClass != null) {
+
+                if (context.request.model != null) {
+                    context.request.model = new HashMap()
                 }
 
-                String controllerName = controllerClass.logicalPropertyName
+                String controllerName = context.controllerClass.logicalPropertyName
 
-                request.model.actionTitle = controllerName
-                request.model.actionIcon = null
-
-
-                request.model.actionDescription = actionName
-
-                String messageTitleCode       = "${controllerName}.${actionName}.action.title"
-                String messageDescriptionCode = "${controllerName}.${actionName}.action.description"
-                String messageIconCode        = "${controllerName}.${actionName}.action.icon"
+                context.request.model.actionTitle = context.controllerName
+                context.request.model.actionIcon = null
 
 
-                if (!(dbMessageSourceService.hasMessageOnDb(messageTitleCode, request.locale) && dbMessageSourceService.hasMessageOnDb(messageDescriptionCode, request.locale))) {
+                context.request.model.actionDescription = context.actionName
 
-                    ActionDescription ann = extractAnnotationFromMethod(controllerClass,actionName)
+                String messageTitleCode       = "${controllerName}.${context.actionName}.action.title"
+                String messageDescriptionCode = "${controllerName}.${context.actionName}.action.description"
+                String messageIconCode        = "${controllerName}.${context.actionName}.action.icon"
+
+
+                if (!(dbMessageSourceService.hasMessageOnDb(messageTitleCode, context.request.locale) && dbMessageSourceService.hasMessageOnDb(messageDescriptionCode, context.request.locale))) {
+
+                    ActionDescription ann = extractAnnotationFromMethod(context.controllerClass, context.actionName)
 
                     if (ann != null) {
 
-                        request.model.actionTitle       = ann.title()
-                        request.model.actionDescription = ann.description()
-                        request.model.actionIcon        = ann.icon()
+                        context.request.model.actionTitle       = ann.title()
+                        context.request.model.actionDescription = ann.description()
+                        context.request.model.actionIcon        = ann.icon()
 
-                        breadcrumbProcessorService.process(controllerClass,actionName,ann.breadcrumb(),request,response)
+                        //breadcrumbProcessorService.process(controllerClass,actionName,ann.breadcrumb(),request,response)
 
                     }
 
@@ -89,9 +92,9 @@ class ActionDescriptionProcessorService implements GenericControllerExecutionPro
 
                     Object[] args = []
 
-                    request.model.actionTitle       = dbMessageSourceService.getMessage(messageTitleCode, args, controllerName, request.locale)
-                    request.model.actionDescription = dbMessageSourceService.getMessage(messageDescriptionCode, args, actionName, request.locale)
-                    request.model.actionIcon        = dbMessageSourceService.getMessage(messageIconCode, args, "", request.locale)
+                    context.request.model.actionTitle       = dbMessageSourceService.getMessage(messageTitleCode, args, context.controllerName, context.request.locale)
+                    context.request.model.actionDescription = dbMessageSourceService.getMessage(messageDescriptionCode, args, context.actionName, context.request.locale)
+                    context.request.model.actionIcon        = dbMessageSourceService.getMessage(messageIconCode, args, "", context.request.locale)
 
                 }
 
@@ -103,7 +106,10 @@ class ActionDescriptionProcessorService implements GenericControllerExecutionPro
 
         log.debug "ActionDescriptionProcessor - process - END"
 
+
+        return resultado
     }
+
 
 
     protected ActionDescription extractAnnotationFromMethod (GrailsClass controllerClass, String methodName){

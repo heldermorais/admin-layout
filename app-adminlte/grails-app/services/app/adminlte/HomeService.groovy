@@ -5,7 +5,7 @@ import grails.gorm.transactions.Transactional
 
 
 
-@ProxiedBean()
+
 @Transactional
 class HomeService {
   

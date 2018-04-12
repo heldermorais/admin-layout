@@ -20,7 +20,7 @@ class CommonBackendGrailsPlugin extends Plugin {
     def author = "Helder Morais"
     def authorEmail = "helder.morais@gmail.com"
     def description = '''\
-Brief summary/description of the plugin.
+Contém classes que formam o backend requerido para implementar um AdminLayout.
 '''
     def profiles = ['web']
 

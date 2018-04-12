@@ -1,9 +1,13 @@
 package common.backend.processors
 
+import common.backend.bean.ProxiedBean
 import common.backend.controller.Breadcrumb
 import common.backend.controller.BreadcrumbLifecycle
-import common.backend.controller.ControllerProcessorException
-import common.backend.controller.GenericControllerExecutionProcessor
+import common.backend.controller.processor.ControllerExecutionContext
+import common.backend.controller.processor.ControllerProcessorException
+import common.backend.controller.processor.GenericControllerExecutionProcessor
+import common.backend.controller.processor.IControllerExecutionProcessor
+import common.backend.utils.Constants
 import grails.core.GrailsClass
 import grails.gorm.transactions.Transactional
 import org.springframework.core.annotation.AnnotationUtils
@@ -12,13 +16,11 @@ import org.springframework.util.ReflectionUtils
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 import javax.servlet.http.HttpSession
-import java.lang.annotation.Annotation
 import java.lang.reflect.Method
 
 
-
 @Transactional
-class BreadcrumbProcessorService implements GenericControllerExecutionProcessor {
+class BreadcrumbProcessorService extends GenericControllerExecutionProcessor {
 
 
     @Override
@@ -26,21 +28,27 @@ class BreadcrumbProcessorService implements GenericControllerExecutionProcessor 
         return "breadcrumbProcessorService"
     }
 
-
     @Override
-    void process(GrailsClass controllerClass, String actionName, HttpServletRequest request, HttpServletResponse response) throws ControllerProcessorException {
+    boolean execute(ControllerExecutionContext context) throws ControllerProcessorException {
+        boolean resultado = Constants.CONTINUE_CHAIN
 
-        HttpSession session = request.session
+        HttpSession session = context.request.session
 
         try{
-            if (controllerClass != null) {
-                log.debug "BreadcrumbProcessorService - process - Achou controllerClass"
+            if (context.controllerClass != null) {
+                log.debug "BreadcrumbProcessorService - execute - Achou controllerClass"
 
 
-                Breadcrumb ann = extractAnnotationFromMethod(controllerClass, actionName)
+                Breadcrumb ann = extractAnnotationFromMethod(context.controllerClass, context.actionName)
 
                 if (ann != null){
-                    process(controllerClass,actionName,ann,request,response)
+                    process(
+                            context.controllerClass,
+                            context.actionName,
+                            context.ann,
+                            context.request,
+                            context.response
+                           )
                 }
 
             }
@@ -49,6 +57,8 @@ class BreadcrumbProcessorService implements GenericControllerExecutionProcessor 
             throw new ControllerProcessorException(ex)
         }
 
+
+        return resultado
     }
 
 

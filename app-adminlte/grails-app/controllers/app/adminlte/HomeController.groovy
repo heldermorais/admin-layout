@@ -17,6 +17,7 @@ class HomeController {
     @ActionDescription(title="Home",description="index", breadcrumb = @Breadcrumb(label = "Home (index)" ))
     def index() {
 
+        log.info "HomeController.index(): session ${session.id}"
         homeService.serviceMethod()
         //render "<h1>Home Controller !</h1>"
 
@@ -26,6 +27,8 @@ class HomeController {
 
     @ActionDescription(title="Home",description="show", breadcrumb = @Breadcrumb(label = "Home (show)", operation = BreadcrumbLifecycle.ADD))
     def show() {
+
+        log.info "HomeController.show(): session ${session.id}"
 
         homeService.serviceMethod()
         //render "<h1>Home Controller !</h1>"

@@ -49,7 +49,6 @@ public class ProxiedSessionBeanPostProcessor implements BeanFactoryPostProcessor
 
 
 
-
             log.debug "Criando registro para ScopedProxyFactoryBean (${oldBeanName})."
             GenericBeanDefinition bd = new GenericBeanDefinition()
             bd.setBeanClass(org.springframework.aop.scope.ScopedProxyFactoryBean)
@@ -57,7 +56,7 @@ public class ProxiedSessionBeanPostProcessor implements BeanFactoryPostProcessor
             bd.getPropertyValues().add("proxyTargetClass", proxyTargetClass)
 
             log.debug "Registrando o proxy como (${beanName})."
-            ((DefaultListableBeanFactory) beanFactory).registerBeanDefinition("${beanName}", bd)
+            ((DefaultListableBeanFactory) beanFactory).registerAlias( oldBeanName, "${beanName}")
 
 
 

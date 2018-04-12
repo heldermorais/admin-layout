@@ -11,8 +11,5 @@
 *= require node_modules/select2/dist/css/select2
 *= require datatables/datatables
 *= require node_modules/bootstrap/dist/css/bootstrap
-*= require grails
-*= require main
-*= require mobile
 *= require_self
 */

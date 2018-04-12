@@ -1,7 +1,8 @@
 package common.backend.interceptors
 
-import common.backend.controller.ControllerProcessorException
-import common.backend.controller.GenericControllerExecutionProcessor
+import common.backend.controller.processor.ControllerExecutionContext
+import common.backend.controller.processor.ControllerProcessorException
+import common.backend.controller.processor.IControllerExecutionProcessor
 import common.backend.processors.ActionDescriptionProcessorService
 import common.backend.utils.Constants
 import grails.core.GrailsApplication
@@ -30,6 +31,9 @@ class ForEachControllerInterceptor {
     ForEachControllerInterceptor() {
         matchAll()
                 .excludes(controller: 'login')
+                .excludes(controller: 'logon')
+                .excludes(controller: 'logout')
+                .excludes(controller: 'logoff')
                 .excludes(controller: 'auth')
                 .excludes(uri: '/static/**')
     }
@@ -43,34 +47,52 @@ class ForEachControllerInterceptor {
      */
     boolean before(){
 
-        HttpSession session = request.getSession(true)
+        boolean resultado = true
+
+        //HttpSession session = session
 
         request.model = new HashMap()
 
 
         if (session.isNew()) {
             log.info "ForEachControllerInterceptor - session.isNew (${session.id})"
+            session.putAt("Zzz", "Helder")
         } else {
             log.info "ForEachControllerInterceptor - session.alreadyCreated (${session.id})"
         }
 
+
         MDC.put(Constants.LOG_SESSIONID_KEY,session.id)
 
 
-        log.debug "Finding the names of all beans implementing GenericControllerExecutionProcessor... "
-        Map processorBeans = grailsApplication.getMainContext().getBeansOfType(GenericControllerExecutionProcessor)
+        log.debug "Finding the names of all beans implementing IControllerExecutionProcessor... "
+        Map processorBeans = grailsApplication.getMainContext().getBeansOfType(IControllerExecutionProcessor)
+
+        ControllerExecutionContext context = new ControllerExecutionContext()
+        context.actionName      = actionName
+        context.controllerClass = controllerClass
+        context.controllerName  = controllerName
+        context.request         = request
+        context.response        = response
+        context.callerInterceptor = this
 
         for (processorName in processorBeans.keySet()){
 
-            GenericControllerExecutionProcessor processor = null
+            IControllerExecutionProcessor processor = null
 
             try{
 
-                //log.debug "Getting instance of bean ${processorName}..."
+                log.debug "Getting instance of bean ${processorName}..."
                 processor = processorBeans.get(processorName)
 
-                processor.process(controllerClass, actionName, request, response)
-                //log.debug "${processorName} has finished its job."
+                boolean res = processor.execute(context)
+
+                if(res == Constants.ABORT_CHAIN){
+                    resultado = false
+                    break
+                }
+
+                log.debug "${processorName} has finished its job."
 
             }catch (ControllerProcessorException ex){
 
@@ -80,20 +102,34 @@ class ForEachControllerInterceptor {
 
         }
 
-        log.info "breadcrumbs: ${request.model}"
 
-        if(request[GenericControllerExecutionProcessor.BYPASS_CONTROLLER] == true){
+        //log.info "breadcrumbs: ${request.model}"
+
+/*
+        if(request[IControllerExecutionProcessor.BYPASS_CONTROLLER] == true){
             log.warn "Aborting the execution of [${controllerName}.${actionName}]"
 
-            if(request[GenericControllerExecutionProcessor.BYPASS_CONTROLLER_REDIRECT_TO] != null){
-                redirect url: request[GenericControllerExecutionProcessor.BYPASS_CONTROLLER_REDIRECT_TO]
+            if(request[IControllerExecutionProcessor.BYPASS_CONTROLLER_REDIRECT_TO] != null){
+                redirect url: request[IControllerExecutionProcessor.BYPASS_CONTROLLER_REDIRECT_TO]
             }
 
             return false
         }else{
             return true
         }
+*/
 
+
+        /*log.info "Executando ${context.controllerName}.${context.actionName}()"
+
+        if ((context?.controllerName?.equalsIgnoreCase("home") )&&(context?.actionName?.equalsIgnoreCase("index"))){
+            log.warn "Redirecting to [home.show]"
+            context.callerInterceptor.redirect controller: "home", action: "show"
+            resultado = false
+        }*/
+
+
+        return resultado
 
     }
 
