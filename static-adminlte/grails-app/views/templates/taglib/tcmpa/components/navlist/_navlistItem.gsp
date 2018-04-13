@@ -1,0 +1,1 @@
+<li class="<g:if test="${attrs?.active}">active</g:if> ${attrs?.extraClasses}"><a href="${attrs?.url ? attrs?.url : '#'}"><g:if test="${attrs.icon}"><i class="icon-${attrs.icon}"></i></g:if> ${attrs.label}</a></li>

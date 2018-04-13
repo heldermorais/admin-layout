@@ -7,7 +7,6 @@
 <body>
 
 
-
 <content tag="content-header">
     <h1>
         Dashboard
@@ -32,12 +31,24 @@
 
 
 <content tag="main-menu">
-        <adminLte:navbarMenu>
+    <%
+
+       def nodeBuilder = new NodeBuilder()
+       def ds = nodeBuilder.menu(text: "Menu2", icon: "fa fa-gear", href: "#" )
+
+       def ds2 = [text: "Menu3", icon: "fa fa-trash", href: "#"]
+
+       //def ds3 = {text: "Menu3", icon: "fa fa-trash", href: "#"}
+
+    %>
+
+        <adminLte:navbarMenu text="Meu Menu" href="#" icon="fa fa-gear" datasource="${ds2}" >
             <adminLte:navbarMenuItem href="#" icon="fa fa-gear" text="MenuItem1" disabled="true"/>
             <adminLte:navbarDividerItem />
             <li><a href="#">Environment: ${grails.util.Environment.current.name}</a></li>
             <li><a href="#">Environment: ${grails.util.Environment.current.name}</a></li>
         </adminLte:navbarMenu>
+
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Application Status <span class="caret"></span></a>
             <ul class="dropdown-menu">

@@ -1,0 +1,1 @@
+<li class="<g:if test="${attrs?.active}">active</g:if> ${attrs?.extraClasses}"><a data-ajax="true" data-ajax-method="post" data-ajax-mode="${attrs?.'ajax-mode'}" data-ajax-update="#${attrs?.'ajax-update'}" data-ajax-url="${attrs?.url ? attrs?.url : '#'}"><g:if test="${attrs.icon}"><i class="icon-${attrs.icon}"></i></g:if> ${attrs.label}</a></li>

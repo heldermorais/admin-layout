@@ -57,17 +57,17 @@ class ActionDescriptionProcessorService extends GenericControllerExecutionProces
         try {
             if (context.controllerClass != null) {
 
-                if (context.request.model != null) {
-                    context.request.model = new HashMap()
+                if (context.flash.model != null) {
+                    context.flash.model = new HashMap()
                 }
 
                 String controllerName = context.controllerClass.logicalPropertyName
 
-                context.request.model.actionTitle = context.controllerName
-                context.request.model.actionIcon = null
+                context.flash.model.actionTitle = context.controllerName
+                context.flash.model.actionIcon = null
 
 
-                context.request.model.actionDescription = context.actionName
+                context.flash.model.actionDescription = context.actionName
 
                 String messageTitleCode       = "${controllerName}.${context.actionName}.action.title"
                 String messageDescriptionCode = "${controllerName}.${context.actionName}.action.description"
@@ -80,9 +80,9 @@ class ActionDescriptionProcessorService extends GenericControllerExecutionProces
 
                     if (ann != null) {
 
-                        context.request.model.actionTitle       = ann.title()
-                        context.request.model.actionDescription = ann.description()
-                        context.request.model.actionIcon        = ann.icon()
+                        context.flash.model.actionTitle       = ann.title()
+                        context.flash.model.actionDescription = ann.description()
+                        context.flash.model.actionIcon        = ann.icon()
 
                         //breadcrumbProcessorService.process(controllerClass,actionName,ann.breadcrumb(),request,response)
 
@@ -92,9 +92,9 @@ class ActionDescriptionProcessorService extends GenericControllerExecutionProces
 
                     Object[] args = []
 
-                    context.request.model.actionTitle       = dbMessageSourceService.getMessage(messageTitleCode, args, context.controllerName, context.request.locale)
-                    context.request.model.actionDescription = dbMessageSourceService.getMessage(messageDescriptionCode, args, context.actionName, context.request.locale)
-                    context.request.model.actionIcon        = dbMessageSourceService.getMessage(messageIconCode, args, "", context.request.locale)
+                    context.flash.model.actionTitle       = dbMessageSourceService.getMessage(messageTitleCode, args, context.controllerName, context.request.locale)
+                    context.flash.model.actionDescription = dbMessageSourceService.getMessage(messageDescriptionCode, args, context.actionName, context.request.locale)
+                    context.flash.model.actionIcon        = dbMessageSourceService.getMessage(messageIconCode, args, "", context.request.locale)
 
                 }
 

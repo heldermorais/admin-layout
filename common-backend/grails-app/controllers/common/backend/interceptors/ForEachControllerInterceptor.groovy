@@ -29,6 +29,7 @@ class ForEachControllerInterceptor {
     GrailsApplication grailsApplication
 
     ForEachControllerInterceptor() {
+
         matchAll()
                 .excludes(controller: 'login')
                 .excludes(controller: 'logon')
@@ -36,6 +37,7 @@ class ForEachControllerInterceptor {
                 .excludes(controller: 'logoff')
                 .excludes(controller: 'auth')
                 .excludes(uri: '/static/**')
+
     }
 
 
@@ -51,7 +53,7 @@ class ForEachControllerInterceptor {
 
         //HttpSession session = session
 
-        request.model = new HashMap()
+        flash.model = new HashMap()
 
 
         if (session.isNew()) {
@@ -69,11 +71,12 @@ class ForEachControllerInterceptor {
         Map processorBeans = grailsApplication.getMainContext().getBeansOfType(IControllerExecutionProcessor)
 
         ControllerExecutionContext context = new ControllerExecutionContext()
-        context.actionName      = actionName
-        context.controllerClass = controllerClass
-        context.controllerName  = controllerName
-        context.request         = request
-        context.response        = response
+        context.actionName        = actionName
+        context.controllerClass   = controllerClass
+        context.controllerName    = controllerName
+        context.request           = request
+        context.response          = response
+        context.flash             = flash
         context.callerInterceptor = this
 
         for (processorName in processorBeans.keySet()){
@@ -145,7 +148,7 @@ class ForEachControllerInterceptor {
             model = new HashMap()
         }
 
-        model << request?.model
+        model << flash?.model
 
         return true
     }

@@ -1,0 +1,1 @@
+<li class="nav-header"><g:if test="${attrs.icon}"><i class="icon-${attrs.icon}"></i></g:if> ${attrs.label}</li>
