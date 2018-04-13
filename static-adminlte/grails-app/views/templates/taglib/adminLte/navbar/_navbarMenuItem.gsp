@@ -1,0 +1,1 @@
+<li class="${attrs.disabled}"><a href="${attrs.href}"><i class="${attrs.icon}"></i> ${attrs.text}</a></li>

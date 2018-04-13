@@ -1,5 +1,7 @@
 include 'app-adminlte', 'common-backend', 'gui-adminLayout', 'app-teste'
 
+include 'static-adminlte'
+
 
 //include 'g3-spe-remessa-domain'
 //project(":g3-spe-remessa-domain").projectDir = file("../spe/g3-spe-remessa-domain")
