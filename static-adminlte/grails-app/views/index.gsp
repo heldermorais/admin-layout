@@ -1,32 +1,82 @@
 <!doctype html>
 <html>
 <head>
-    <meta name="layout" content="adminlte"/>
+
     <title>Welcome to Grails</title>
+
+
+    <meta name="layout"         content="adminlte"/>
+    <meta name="app-mini-logo"  content="grails.svg"/>
+    <meta name="app-logo"       content="logo_TCMPA2018.png"/>
+
 </head>
 <body>
 
 
 <content tag="content-header">
+
     <h1>
         Dashboard
         <small>Version 2.0</small>
     </h1>
+
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Dashboard</li>
     </ol>
+
 </content>
 
 
-<content tag="sidebar-user-panel">
-    <div class="pull-left image">
-        <asset:image src="adminlte/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+<content tag="sidebar-user-menu">
+
+    <adminLte:sidebarMenuHeader text="User Navigation" />
+
+    <adminLte:sidebarMenu text="My Dashboard" icon="fa fa-dashboard">
+
+        <adminLte:sidebarMenuItem text="Minha Dashboard" icon="fa fa-circle text-success" />
+
+        <adminLte:sidebarMenuItem text="Item com Label" icon="fa fa-circle">
+            <adminLte:sidebarMenuItemLabel text="4" />
+        </adminLte:sidebarMenuItem>
+
+        <li><a href="#"><i class="fa ga-gear"></i> Dashboard v1</a></li>
+        <li><a href="#"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+
+    </adminLte:sidebarMenu>
+
+</content>
+
+
+
+<content tag="sidebar-user-content">
+
+    <div class="user-panel">
+        <div class="pull-left image">
+            <asset:image src="adminlte/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
+        </div>
+        <div class="pull-left info">
+            <p>Helder Morais</p>
+            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        </div>
     </div>
-    <div class="pull-left info">
-        <p>Helder Morais</p>
-        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+
+
+    <!-- search form -->
+    <div class="content-fluid">
+        <form action="#" method="POST" class="sidebar-form">
+            <div class="input-group">
+                <input type="text" name="searchForThis" class="form-control" placeholder="Procurar por...">
+                <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                  <i class="fa fa-search"></i>
+                </button>
+              </span>
+            </div>
+        </form>
     </div>
+    <!-- /.search form -->
+
 </content>
 
 
@@ -87,16 +137,26 @@
 </content>
 
 
+
+
+
+
     <div class="svg" role="presentation">
         <div class="grails-logo-container">
             <asset:image src="grails-cupsonly-logo-white.svg" class="grails-logo"/>
         </div>
     </div>
 
+
+
+
+
     <div id="content" role="main">
 
             <h1>Welcome to Grails</h1>
-
+            <adminLte:tag tagName="h1">
+                Welcome to Grails II
+            </adminLte:tag>
             <p>
                 Congratulations, you have successfully started your first Grails application! At the moment
                 this is the default page, feel free to modify it to either redirect to a controller or display

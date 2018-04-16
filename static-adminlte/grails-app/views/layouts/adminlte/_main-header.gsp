@@ -5,9 +5,9 @@
     <!-- Logo -->
     <a href="#" class="logo" data-toggle="push-menu">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><asset:image src="grails.svg" alt="Smiley face" height="32" width="32" /></span>
+        <span class="logo-mini"><asset:image src="${g.pageProperty([name: "meta.app-mini-logo"])}" alt="Smiley face" height="32" width="32" /></span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><asset:image src="logo_TCMPA2018.png" alt="Smiley face" height="32" /></span>
+        <span class="logo-lg"><asset:image src="${g.pageProperty([name: "meta.app-logo"])}" alt="Smiley face" height="32" /></span>
     </a>
 
     <!-- Header Navbar: style can be found in header.less -->
