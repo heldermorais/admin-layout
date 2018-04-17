@@ -1,11 +1,11 @@
 package static.adminlte
 
 
+import groovy.util.logging.Slf4j
 import org.apache.commons.beanutils.BeanUtils
 
 
-
-
+@Slf4j
 class AdminLteTagLib {
 
     static namespace = "adminLte"
@@ -20,7 +20,7 @@ class AdminLteTagLib {
 
         if(attrs?.datasource != null){
 
-            //println "Tem Datasource ! ${attrs.datasource}"
+            log.debug "Tem Datasource ! ${attrs.datasource}"
 
             def _datasource = null
 
@@ -28,6 +28,16 @@ class AdminLteTagLib {
                 _datasource = attrs?.datasource.attributes()
             }else{
                 _datasource = attrs?.datasource
+            }
+
+            Map<String,String> props = BeanUtils.describe( _datasource )
+            for(String propName in props){
+
+                if( (propName != "class")&&(propName != "metaClass") ){
+                    log.debug "  prop: ${propName}"
+                    attrs[propName] = BeanUtils.getProperty(_datasource, propName)
+                }
+
             }
 
             //attrs.text = BeanUtils.getProperty(_datasource, "text")

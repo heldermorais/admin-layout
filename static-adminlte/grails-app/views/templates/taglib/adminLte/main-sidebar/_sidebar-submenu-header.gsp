@@ -1,1 +1,1 @@
-<li class="${attrs.class} header">${attrs.text}</li>
+<li class="${attrs.cssClass} header">${attrs.text}</li>
