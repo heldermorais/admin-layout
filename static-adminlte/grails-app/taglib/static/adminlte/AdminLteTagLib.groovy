@@ -92,6 +92,7 @@ class AdminLteTagLib {
 
     }
 
+
     def navbarMenuItem = { attrs, body ->
         attrs?.disabled = attrs?.disabled != null ? "disabled" : ""
 
@@ -104,6 +105,7 @@ class AdminLteTagLib {
 
         //out << g.render( template: "${templatePath}/navbar/navbarMenuItem" , model: [attrs: attrs, tbody: body()])
     }
+
 
     def navbarDividerItem = { attrs, body ->
 
@@ -131,6 +133,7 @@ class AdminLteTagLib {
         //out << g.render( template: "${templatePath}/navbar/navbarMenuDivider" , model: [attrs: attrs])
     }
 
+
     def sidebarMenuHeader = { attrs, body ->
 
         String defaultTemplate = "${templatePath}/main-sidebar/sidebar-submenu-header"
@@ -142,6 +145,7 @@ class AdminLteTagLib {
 
         //out << g.render( template: "${templatePath}/navbar/navbarMenuDivider" , model: [attrs: attrs])
     }
+
 
     def sidebarMenuItem = { attrs, body ->
 
@@ -155,6 +159,7 @@ class AdminLteTagLib {
         //out << g.render( template: "${templatePath}/navbar/navbarMenuDivider" , model: [attrs: attrs])
     }
 
+
     def sidebarMenuItemLabel = { attrs, body ->
 
         String defaultTemplate = "${templatePath}/main-sidebar/sidebar-submenu-itemLabel"
@@ -166,4 +171,5 @@ class AdminLteTagLib {
 
         //out << g.render( template: "${templatePath}/navbar/navbarMenuDivider" , model: [attrs: attrs])
     }
+
 }
