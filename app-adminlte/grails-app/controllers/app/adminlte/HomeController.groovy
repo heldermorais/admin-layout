@@ -3,11 +3,13 @@ package app.adminlte
 import common.backend.controller.Breadcrumb
 import common.backend.controller.BreadcrumbLifecycle
 import common.backend.controller.ActionDescription
-
+import grails.core.GrailsApplication
 
 
 class HomeController {
 
+
+    GrailsApplication grailsApplication
 
     //HomeService proxiedHomeService
     HomeService homeService
@@ -18,6 +20,8 @@ class HomeController {
     def index() {
 
         log.info "HomeController.index(): session ${session.id}"
+        log.warn "HomeController.config : ${grailsApplication.config?.mail?.hostname} "
+
         homeService.serviceMethod()
         //render "<h1>Home Controller !</h1>"
 
