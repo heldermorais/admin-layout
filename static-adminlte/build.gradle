@@ -62,6 +62,8 @@ dependencies {
     // https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils
     compile group: 'commons-beanutils', name: 'commons-beanutils', version: '1.9.3'
 
+
+    compile 'net.rakugakibox.spring.boot:logback-access-spring-boot-starter:2.6.0'
 }
 
 bootRun {
