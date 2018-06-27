@@ -29,6 +29,8 @@ class ExternalConfigSetupService implements EnvironmentAware {
 
         for (String extConfigName in externalConfigs){
 
+
+            
             def configBase = new File(extConfigName)
 
             if(configBase.exists()) {
@@ -38,6 +40,8 @@ class ExternalConfigSetupService implements EnvironmentAware {
             } else {
                 println "External config could not be found, checked ${configBase.absolutePath}"
             }
+
+
 
         }
 

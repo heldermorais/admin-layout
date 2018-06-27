@@ -2,6 +2,7 @@ package common.backend.config.reload
 
 import grails.core.GrailsApplication
 import groovy.transform.CompileStatic
+import groovy.util.logging.Slf4j
 import org.apache.commons.io.FilenameUtils
 import org.grails.config.NavigableMapPropertySource
 import org.grails.config.yaml.YamlPropertySourceLoader
@@ -16,42 +17,114 @@ import org.springframework.core.env.MapPropertySource
 import org.springframework.core.io.DefaultResourceLoader
 import org.springframework.core.io.Resource
 import org.springframework.core.io.ResourceLoader
-import org.springframework.util.FileSystemUtils
 
 
-@CompileStatic
+
+@Slf4j
+//@CompileStatic
 class ExternalConfigRunListener implements SpringApplicationRunListener {
 
-    private ResourceLoader defaultResourceLoader = new DefaultResourceLoader()
-    private YamlPropertySourceLoader yamlPropertySourceLoader = new YamlPropertySourceLoader()
-    private Logger log = LoggerFactory.getLogger('common.backend.config.reload.ExternalConfig')
 
+
+    protected static String APP_MASTER_CONFIG = "/grails-apps/conf/application.groovy"
+    public static final String ENV_GRAILS_CONFIG_LOCATIONS = 'grails.config.locations'
+
+
+    protected ResourceLoader defaultResourceLoader = new DefaultResourceLoader()
+    protected YamlPropertySourceLoader yamlPropertySourceLoader = new YamlPropertySourceLoader()
+//    protected Logger log = LoggerFactory.getLogger('common.backend.config.reload.ExternalConfig')
+
+
+
+    protected String appKey = ""
+
+
+
+    protected HashSet<String> externalConfigs = new HashSet<>()
 
 
     public ExternalConfigRunListener(SpringApplication application, String[] args) {
 
-       if(application instanceof GrailsApplication){
-           println "GrailsApp !"
-       }else{
-           println "SpringApp ! ${application}"
-       }
+        APP_MASTER_CONFIG = "${System.getProperty('user.home')}"+APP_MASTER_CONFIG
+        this.appKey = application.mainApplicationClass.package.name
+        log.debug "Searching for EXTERNAL CONFIG on ${APP_MASTER_CONFIG} to ${this.appKey}"
+
+        this.appKey = "${appKey}.config.locations"
 
     }
-
-
 
 
     @Override
     void environmentPrepared(ConfigurableEnvironment environment) {
 
 
+        externalConfigs.add(APP_MASTER_CONFIG)
+
+
+        String APP_MASTER_CONFIG_ENV = APP_MASTER_CONFIG.replaceAll(".groovy","-${environment.activeProfiles[0]}.groovy")
+        log.debug "Alternative EXTERNAL CONFIG: ${APP_MASTER_CONFIG_ENV}"
+        externalConfigs.add(APP_MASTER_CONFIG_ENV)
+
+
+
+        List locations  = environment.getProperty(ENV_GRAILS_CONFIG_LOCATIONS, ArrayList, [])
+        locations.addAll( environment.getProperty("${this.appKey.toLowerCase()}.config.locations", ArrayList, []) )
+
+        environment.getProperty("${this.appKey.toLowerCase()}.config.locations", ArrayList, []).each {println " My locations ... ${it}" }
+
+        String encoding = environment.getProperty('grails.config.encoding', String, 'UTF-8')
+
+
+
+
+        for (String extConfigName in externalConfigs){
+
+
+            def configBase = new File(extConfigName)
+
+            if(configBase.exists()) {
+
+                log.debug "Loading EXTERNAL CONFIG from : ${configBase.absolutePath}"
+                def config = new ConfigSlurper().parse(configBase.toURL())
+
+                //def lst = config.get("${this.appKey.toLowerCase()}.config.locations")
+                def lst = config.flatten()
+                for (String item in lst.keySet()){
+                    println " ... ${item}"
+                }
+
+
+                Collection locs = lst.get(ENV_GRAILS_CONFIG_LOCATIONS)
+                for (String configFileName in locs){
+
+                }
+
+                locations.addAll( locs )
+
+                String apk = "${appKey}.config.locations"
+                locs =  lst.get(apk)
+                locations.addAll( locs )
+
+                environment.propertySources.addFirst(new MapPropertySource("externalGroovyConfig", config))
+
+            } else {
+                log.debug "EXTERNAL CONFIG ${configBase.absolutePath} could not be found."
+            }
+
+
+
+        }
+
+
+
+/*
         println "environmentPrepared ${grails.core.ApplicationAttributes.APPLICATION}"
         ApplicationHome apph = new ApplicationHome()
         String app_name = apph.source != null ? apph.source.name : apph.dir.name
         app_name = FilenameUtils.getName(app_name)
         println " app_name : -> ${app_name}"
 
-        for (String propName in environment.getProperties().keySet()){
+        for (String propName in environment.getProperties().keySet()) {
 
             println " propName : -> ${propName}"
 
@@ -59,8 +132,13 @@ class ExternalConfigRunListener implements SpringApplicationRunListener {
 
 
 
-        List locations  = environment.getProperty('grails.config.locations', ArrayList, [])
+        List locations  = environment.getProperty(ENV_GRAILS_CONFIG_LOCATIONS, ArrayList, [])
+        locations.addAll( environment.getProperty("${this.appKey.toLowerCase()}.config.locations", ArrayList, []) )
+
+        environment.getProperty("${this.appKey.toLowerCase()}.config.locations", ArrayList, []).each {println " My locations ... ${it}" }
+
         String encoding = environment.getProperty('grails.config.encoding', String, 'UTF-8')
+*/
 
         for (location in locations) {
             log.info(" External config file: ${location} ")
@@ -125,10 +203,13 @@ class ExternalConfigRunListener implements SpringApplicationRunListener {
     }
 
     // Spring Boot 1.4 or higher
-    void starting() { println "Starting" }
+    void starting() { }
     // Spring Boot 1.3
-    void started() {  println "Started" }
-    void contextPrepared(ConfigurableApplicationContext context) { println "contextPrepared" }
-    void contextLoaded(ConfigurableApplicationContext context) { println "contextLoaded" }
-    void finished(ConfigurableApplicationContext context, Throwable exception) { println "finished" }
+    void started() { }
+
+    void contextPrepared(ConfigurableApplicationContext context) { }
+
+    void contextLoaded(ConfigurableApplicationContext context) { }
+
+    void finished(ConfigurableApplicationContext context, Throwable exception) { }
 }
