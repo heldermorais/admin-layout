@@ -54,6 +54,8 @@ class ExternalConfigRunListener implements SpringApplicationRunListener {
     }
 
 
+
+
     @Override
     void environmentPrepared(ConfigurableEnvironment environment) {
 
@@ -99,11 +101,16 @@ class ExternalConfigRunListener implements SpringApplicationRunListener {
 
                 }
 
-                locations.addAll( locs )
+                if(locs != null){
+                    locations.addAll( locs )
+                }
+
 
                 String apk = "${appKey}.config.locations"
-                locs =  lst.get(apk)
-                locations.addAll( locs )
+                locs =  lst.get(appKey)
+                if(locs != null) {
+                    locations.addAll(locs)
+                }
 
                 environment.propertySources.addFirst(new MapPropertySource("externalGroovyConfig", config))
 

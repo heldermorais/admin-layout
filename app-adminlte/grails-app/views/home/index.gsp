@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <meta name="layout" content="bs4"/>
+    <meta name="layout" content="main"/>
     <title>Home Controller</title>
 </head>
 <body>
@@ -59,6 +59,13 @@
     <h7> isto esta no body() </h7>
     <p class="card-text">Isto é somente um texto</p>
   </boot:card>
+
+
+    <div class="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <strong>Title!</strong> Alert body ...
+    </div>
+
 </div>
 
 </body>

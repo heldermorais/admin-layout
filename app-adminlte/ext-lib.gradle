@@ -3,4 +3,8 @@ dependencies {
 // Additional Libs
 //compile "io.methvin:directory-watcher:0.4.0"
 
+    //compile 'org.grails.plugins:actuator-ui:1.1'
+
+    compile 'org.grails.plugins:grails-console:2.1.1'
+
 }
