@@ -84,6 +84,12 @@ grails:
 endpoints:
     jmx:
         unique-names: true
+    metrics:
+        enabled: true
+        sensitive: false
+    beans:
+        enabled: true
+        sensitive: false
 
 ---
 hibernate:

@@ -1,14 +1,8 @@
-package common.backend.config.reload
+package common.backend.config.external
 
-import grails.core.GrailsApplication
-import groovy.transform.CompileStatic
 import groovy.util.logging.Slf4j
-import org.apache.commons.io.FilenameUtils
 import org.grails.config.NavigableMapPropertySource
 import org.grails.config.yaml.YamlPropertySourceLoader
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
-import org.springframework.boot.ApplicationHome
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.SpringApplicationRunListener
 import org.springframework.context.ConfigurableApplicationContext
@@ -32,7 +26,7 @@ class ExternalConfigRunListener implements SpringApplicationRunListener {
 
     protected ResourceLoader defaultResourceLoader = new DefaultResourceLoader()
     protected YamlPropertySourceLoader yamlPropertySourceLoader = new YamlPropertySourceLoader()
-//    protected Logger log = LoggerFactory.getLogger('common.backend.config.reload.ExternalConfig')
+//    protected Logger log = LoggerFactory.getLogger('common.backend.config.external.ExternalConfig')
 
 
 
@@ -66,7 +60,6 @@ class ExternalConfigRunListener implements SpringApplicationRunListener {
         String APP_MASTER_CONFIG_ENV = APP_MASTER_CONFIG.replaceAll(".groovy","-${environment.activeProfiles[0]}.groovy")
         log.debug "Alternative EXTERNAL CONFIG: ${APP_MASTER_CONFIG_ENV}"
         externalConfigs.add(APP_MASTER_CONFIG_ENV)
-
 
 
         List locations  = environment.getProperty(ENV_GRAILS_CONFIG_LOCATIONS, ArrayList, [])

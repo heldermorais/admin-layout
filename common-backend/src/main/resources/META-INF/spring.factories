@@ -1,1 +1,1 @@
-org.springframework.boot.SpringApplicationRunListener=common.backend.config.reload.ExternalConfigRunListener
+org.springframework.boot.SpringApplicationRunListener=common.backend.config.external.ExternalConfigRunListener

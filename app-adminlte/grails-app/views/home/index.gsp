@@ -3,6 +3,22 @@
 <head>
     <meta name="layout" content="main"/>
     <title>Home Controller</title>
+
+    <script type="text/javascript">
+    (function(d, m){
+      var o = {
+                "appId":"8a0be82e154f23ec3028a0b4c3d56837",
+                "isAnonymousChat":false,
+                "agentId":"helder.morais@tcm.pa.gov.br",
+                "agentName":"Helder Morais",
+                "conversationTitle":"Suporte - Mural de Lic.","email":""};
+      var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
+      s.src = "https://api.kommunicate.io/kommunicate.app";
+      var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
+      window.kommunicate = m; m._globals = o;
+    })(document, window.kommunicate || {});
+    </script>
+
 </head>
 <body>
 
