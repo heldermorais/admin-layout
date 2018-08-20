@@ -41,6 +41,9 @@ class Teste {
         println(attributes)
 
 
+        String home = System.getProperty("user.home");
+        System.out.println("User Home Directory: " + home);
+
 
     }
 }

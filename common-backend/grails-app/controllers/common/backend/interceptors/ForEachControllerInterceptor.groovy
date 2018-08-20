@@ -31,6 +31,7 @@ class ForEachControllerInterceptor {
     ForEachControllerInterceptor() {
 
         matchAll()
+                .excludes(controller: 'console')
                 .excludes(controller: 'login')
                 .excludes(controller: 'logon')
                 .excludes(controller: 'logout')
@@ -71,7 +72,7 @@ class ForEachControllerInterceptor {
         Map processorBeans = grailsApplication.getMainContext().getBeansOfType(IControllerExecutionProcessor)
 
         ControllerExecutionContext context = new ControllerExecutionContext()
-        context.actionName        = actionName
+        context.actionName        = actionName != null ? actionName : "zzz"
         context.controllerClass   = controllerClass
         context.controllerName    = controllerName
         context.request           = request
